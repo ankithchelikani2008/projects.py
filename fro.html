@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hostel Exit Manager - Login</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --secondary: #6366f1;
+    --green: #10b981;
+    --orange: #f59e0b;
+    --red: #ef4444;
+    --dark: #111827;
+    --gray: #6b7280;
+    --light-gray: #f3f4f6;
+    --white: #ffffff;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(circle at 10% 20%, rgba(99,102,241,.25), transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(16,185,129,.20), transparent 30%),
+        linear-gradient(135deg, #eef2ff, #f8fafc);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+/* =====================================================
+   MAIN LOGIN CONTAINER
+   ===================================================== */
+
+.login-container {
+    width: 100%;
+    max-width: 480px;
+}
+
+/* =====================================================
+   BRAND
+   ===================================================== */
+
+.brand {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.brand-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: auto;
+    margin-bottom: 15px;
+
+    border-radius: 22px;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 32px;
+
+    box-shadow: 0 15px 35px rgba(79,70,229,.25);
+}
+
+.brand h1 {
+    font-size: 32px;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.brand p {
+    color: var(--gray);
+    font-size: 15px;
+}
+
+/* =====================================================
+   LOGIN CARD
+   ===================================================== */
+
+.login-card {
+
+    background: rgba(255,255,255,.92);
+
+    backdrop-filter: blur(20px);
+
+    border-radius: 25px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(15,23,42,.12);
+
+    border: 1px solid rgba(255,255,255,.7);
+}
+
+/* =====================================================
+   ROLE TABS
+   ===================================================== */
+
+.role-tabs {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+
+    background: #f1f5f9;
+
+    padding: 6px;
+
+    border-radius: 14px;
+
+    margin-bottom: 28px;
+}
+
+.role-tab {
+
+    border: none;
+
+    padding: 13px 8px;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #64748b;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+}
+
+.role-tab:hover {
+    background: white;
+}
+
+.role-tab.active {
+
+    background: white;
+
+    color: var(--primary);
+
+    box-shadow:
+        0 4px 12px rgba(15,23,42,.08);
+}
+
+/* WARDEN ACTIVE */
+
+.role-tab.warden.active {
+    color: var(--green);
+}
+
+/* ADMIN ACTIVE */
+
+.role-tab.admin.active {
+    color: var(--orange);
+}
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.field {
+    margin-bottom: 20px;
+}
+
+.field label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper i.left-icon {
+
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #94a3b8;
+
+    pointer-events: none;
+}
+
+.field input {
+
+    width: 100%;
+
+    padding: 14px 45px 14px 45px;
+
+    border: 1.5px solid #dbe2ea;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 15px;
+
+    background: #f8fafc;
+
+    transition: .25s;
+}
+
+.field input:focus {
+
+    border-color: var(--primary);
+
+    background: white;
+
+    box-shadow:
+        0 0 0 4px rgba(79,70,229,.08);
+}
+
+.field input.error {
+
+    border-color: var(--red);
+
+    box-shadow:
+        0 0 0 3px rgba(239,68,68,.08);
+}
+
+/* PASSWORD EYE */
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #64748b;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.field-error {
+
+    display: none;
+
+    color: var(--red);
+
+    font-size: 12px;
+
+    margin-top: 6px;
+
+    padding-left: 3px;
+}
+
+.field-error.show {
+    display: block;
+}
+
+/* =====================================================
+   HINT
+   ===================================================== */
+
+.login-hint {
+
+    background: #eef2ff;
+
+    border: 1px solid #e0e7ff;
+
+    color: #4338ca;
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+.login-hint strong {
+    color: #312e81;
+}
+
+/* =====================================================
+   LOGIN BUTTON
+   ===================================================== */
+
+.login-button {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 9px;
+
+    transition: .25s;
+
+    box-shadow:
+        0 10px 25px rgba(79,70,229,.22);
+}
+
+.login-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 30px rgba(79,70,229,.28);
+}
+
+.login-button.warden {
+
+    background:
+        linear-gradient(
+            135deg,
+            #059669,
+            #10b981
+        );
+
+    box-shadow:
+        0 10px 25px rgba(16,185,129,.20);
+}
+
+.login-button.admin {
+
+    background:
+        linear-gradient(
+            135deg,
+            #d97706,
+            #f59e0b
+        );
+
+    box-shadow:
+        0 10px 25px rgba(245,158,11,.20);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.login-footer {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+.login-footer i {
+    margin-right: 4px;
+}
+
+/* =====================================================
+   TOAST
+   ===================================================== */
+
+.toast-container {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    z-index: 9999;
+}
+
+.toast {
+
+    min-width: 280px;
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    box-shadow:
+        0 15px 35px rgba(15,23,42,.18);
+
+    animation: toastIn .3s ease;
+}
+
+.toast.success {
+    background: linear-gradient(135deg,#059669,#10b981);
+}
+
+.toast.error {
+    background: linear-gradient(135deg,#dc2626,#ef4444);
+}
+
+.toast.info {
+    background: linear-gradient(135deg,#4f46e5,#6366f1);
+}
+
+@keyframes toastIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =====================================================
+   HIDDEN
+   ===================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media(max-width:520px) {
+
+    .login-card {
+        padding: 22px;
+    }
+
+    .brand h1 {
+        font-size: 27px;
+    }
+
+    .role-tab {
+        font-size: 12px;
+    }
+
+    .role-tab i {
+        display: none;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- =================================================
+         BRAND
+         ================================================= -->
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            <i class="fa-solid fa-ticket"></i>
+        </div>
+
+        <h1>Hostel Exit Manager</h1>
+
+        <p>
+            Smart Request, Approval & Tracking System
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         LOGIN CARD
+         ================================================= -->
+
+    <div class="login-card">
+
+        <!-- ROLE TABS -->
+
+        <div class="role-tabs">
+
+            <button
+                type="button"
+                class="role-tab active"
+                data-role="student"
+                onclick="selectLoginRole('student')">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                Student
+
+            </button>
+
+
+            <button
+                type="button"
+                class="role-tab warden"
+                data-role="warden"
+                onclick="selectLoginRole('warden')">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Warden
+
+            </button>
+
+
+            <button
+                type="button"
+                class="role-tab admin"
+                data-role="admin"
+                onclick="selectLoginRole('admin')">
+
+                <i class="fa-solid fa-user-gear"></i>
+
+                Admin
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             LOGIN FORM
+             ================================================= -->
+
+        <form id="loginForm"
+              onsubmit="handleLogin(event)">
+
+
+            <!-- NAME / ID -->
+
+            <div class="field">
+
+                <label id="loginNameLabel">
+
+                    Student Name
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i
+                        class="fa-solid fa-user left-icon">
+                    </i>
+
+                    <input
+                        type="text"
+                        id="loginName"
+                        required
+                        autocomplete="username"
+                        placeholder="e.g. Ananya Rao">
+
+                </div>
+
+                <div
+                    class="field-error"
+                    id="loginNameError">
+
+                    Please enter your name / ID.
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STUDENT REGISTRATION NUMBER
+                 ================================================= -->
+
+            <div
+                class="field"
+                id="loginRegdField">
+
+                <label for="loginRegd">
+
+                    Registration Number
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i
+                        class="fa-solid fa-id-card left-icon">
+                    </i>
+
+                    <input
+                        type="text"
+                        id="loginRegd"
+                        maxlength="10"
+                        minlength="10"
+                        pattern="[A-Za-z0-9]{10}"
+                        autocomplete="username"
+                        placeholder="10-character code">
+
+                </div>
+
+                <div
+                    class="field-error"
+                    id="loginRegdError">
+
+                    Registration number must contain exactly
+                    10 letters/numbers.
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PASSWORD
+                 ================================================= -->
+
+            <div class="field">
+
+                <label for="loginPassword">
+
+                    Password
+
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i
+                        class="fa-solid fa-lock left-icon">
+                    </i>
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        maxlength="4"
+                        minlength="4"
+                        pattern="[0-9]{4}"
+                        inputmode="numeric"
+                        autocomplete="current-password"
+                        placeholder="Enter 4-digit password"
+                        required>
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        onclick="togglePassword()">
+
+                        <i
+                            class="fa-solid fa-eye"
+                            id="passwordEye">
+                        </i>
+
+                    </button>
+
+                </div>
+
+                <div
+                    class="field-error"
+                    id="loginPasswordError">
+
+                    Password must contain exactly 4 digits.
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGIN HINT
+                 ================================================= -->
+
+            <div
+                class="login-hint"
+                id="loginHint">
+
+                <strong>Demo Student Login</strong><br>
+
+                Name:
+                <b>Ananya Rao</b><br>
+
+                Regd. No:
+                <b>23A1B20C34</b><br>
+
+                Password:
+                <b>1234</b>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGIN BUTTON
+                 ================================================= -->
+
+            <button
+                type="submit"
+                class="login-button"
+                id="loginSubmitBtn">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Login as Student
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="login-footer">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        Secure Hostel Permission Management System
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST CONTAINER
+     ===================================================== -->
+
+<div
+    class="toast-container"
+    id="toastContainer">
+</div>
+
+
+<script>
+
+/* =========================================================
+   LOGIN CONFIGURATION
+   ========================================================= */
+
+const LOGIN_COPY = {
+
+    student: {
+
+        label: "Student Name",
+
+        placeholder: "e.g. Ananya Rao",
+
+        hint: `
+            <strong>Demo Student Login</strong><br>
+            Name: <b>Ananya Rao</b><br>
+            Regd. No: <b>23A1B20C34</b><br>
+            Password: <b>1234</b>
+        `,
+
+        button: "Login as Student",
+
+        buttonClass: ""
+
+    },
+
+
+    warden: {
+
+        label: "Warden ID",
+
+        placeholder: "e.g. WARDEN01",
+
+        hint: `
+            <strong>Demo Warden Login</strong><br>
+            Warden ID: <b>WARDEN01</b><br>
+            Password: <b>5678</b>
+        `,
+
+        button: "Login as Warden",
+
+        buttonClass: "warden"
+
+    },
+
+
+    admin: {
+
+        label: "Admin ID",
+
+        placeholder: "e.g. ADMIN01",
+
+        hint: `
+            <strong>Demo Admin Login</strong><br>
+            Admin ID: <b>ADMIN01</b><br>
+            Password: <b>9999</b>
+        `,
+
+        button: "Login as Admin",
+
+        buttonClass: "admin"
+
+    }
+
+};
+
+
+/* =========================================================
+   DEMO CREDENTIALS
+   ========================================================= */
+
+const DEMO_CREDENTIALS = {
+
+    student: {
+
+        "ananya rao": {
+
+            regdNo: "23A1B20C34",
+
+            password: "1234"
+
+        },
+
+        "karthik iyer": {
+
+            regdNo: "23K2C10D87",
+
+            password: "5678"
+
+        },
+
+        "priya menon": {
+
+            regdNo: "23P4M05E56",
+
+            password: "2468"
+
+        }
+
+    },
+
+
+    warden: {
+
+        "warden01": {
+
+            password: "5678"
+
+        },
+
+        "suresh nair": {
+
+            password: "1357"
+
+        }
+
+    },
+
+
+    admin: {
+
+        "admin01": {
+
+            password: "9999"
+
+        },
+
+        "administrator": {
+
+            password: "9999"
+
+        }
+
+    }
+
+};
+
+
+/* =========================================================
+   SESSION
+   ========================================================= */
+
+const SESSION_KEY =
+    "hostelExitSession";
+
+let selectedLoginRole =
+    "student";
+
+
+/* =========================================================
+   SELECT LOGIN ROLE
+   ========================================================= */
+
+function selectLoginRole(role) {
+
+    selectedLoginRole = role;
+
+
+    /* Update active tab */
+
+    document
+        .querySelectorAll(".role-tab")
+        .forEach(button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.role === role
+            );
+
+        });
+
+
+    const copy =
+        LOGIN_COPY[role];
+
+
+    /* Update label */
+
+    document
+        .getElementById("loginNameLabel")
+        .textContent =
+        copy.label;
+
+
+    /* Update placeholder */
+
+    document
+        .getElementById("loginName")
+        .placeholder =
+        copy.placeholder;
+
+
+    /* Update hint */
+
+    document
+        .getElementById("loginHint")
+        .innerHTML =
+        copy.hint;
+
+
+    /* Registration number only for student */
+
+    const regdField =
+        document.getElementById(
+            "loginRegdField"
+        );
+
+    const regdInput =
+        document.getElementById(
+            "loginRegd"
+        );
+
+
+    if(role === "student") {
+
+        regdField.classList.remove(
+            "hidden"
+        );
+
+        regdInput.required = true;
+
+    }
+
+    else {
+
+        regdField.classList.add(
+            "hidden"
+        );
+
+        regdInput.required = false;
+
+        regdInput.value = "";
+
+    }
+
+
+    /* Clear errors */
+
+    clearErrors();
+
+
+    /* Update button */
+
+    const button =
+        document.getElementById(
+            "loginSubmitBtn"
+        );
+
+
+    button.innerHTML = `
+        <i class="fa-solid fa-right-to-bracket"></i>
+        ${copy.button}
+    `;
+
+
+    button.className =
+        "login-button " +
+        copy.buttonClass;
+
+}
+
+
+/* =========================================================
+   CLEAR ERRORS
+   ========================================================= */
+
+function clearErrors() {
+
+    document
+        .querySelectorAll(".field-error")
+        .forEach(error => {
+
+            error.classList.remove("show");
+
+        });
+
+
+    document
+        .querySelectorAll("input")
+        .forEach(input => {
+
+            input.classList.remove("error");
+
+        });
+
+}
+
+
+/* =========================================================
+   PASSWORD SHOW / HIDE
+   ========================================================= */
+
+function togglePassword() {
+
+    const password =
+        document.getElementById(
+            "loginPassword"
+        );
+
+    const eye =
+        document.getElementById(
+            "passwordEye"
+        );
+
+
+    if(password.type === "password") {
+
+        password.type = "text";
+
+        eye.className =
+            "fa-solid fa-eye-slash";
+
+    }
+
+    else {
+
+        password.type = "password";
+
+        eye.className =
+            "fa-solid fa-eye";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+function handleLogin(event) {
+
+    event.preventDefault();
+
+
+    clearErrors();
+
+
+    const name =
+        document
+        .getElementById("loginName")
+        .value
+        .trim();
+
+
+    const regdNo =
+        document
+        .getElementById("loginRegd")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value
+        .trim();
+
+
+    let hasError = false;
+
+
+    /* =====================================================
+       NAME / ID VALIDATION
+       ===================================================== */
+
+    if(!name) {
+
+        showError(
+            "loginName",
+            "loginNameError"
+        );
+
+        hasError = true;
+
+    }
+
+
+    /* =====================================================
+       STUDENT REGD NUMBER VALIDATION
+       ===================================================== */
+
+    if(selectedLoginRole === "student") {
+
+        /*
+         * Exactly 10 characters
+         * Only A-Z, a-z and 0-9
+         */
+
+        if(!/^[A-Za-z0-9]{10}$/.test(regdNo)) {
+
+            showError(
+                "loginRegd",
+                "loginRegdError"
+            );
+
+            hasError = true;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       PASSWORD VALIDATION
+       ===================================================== */
+
+    if(!/^\d{4}$/.test(password)) {
+
+        showError(
+            "loginPassword",
+            "loginPasswordError"
+        );
+
+        hasError = true;
+
+    }
+
+
+    /* Stop if validation failed */
+
+    if(hasError) {
+
+        showToast(
+            "Please fix the highlighted fields.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       CHECK DEMO ACCOUNT
+       ===================================================== */
+
+    const account =
+        DEMO_CREDENTIALS[
+            selectedLoginRole
+        ]?.[
+            name.toLowerCase()
+        ];
+
+
+    if(!account) {
+
+        showToast(
+            "Account not found. Please check your login details.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       CHECK PASSWORD
+       ===================================================== */
+
+    if(account.password !== password) {
+
+        showError(
+            "loginPassword",
+            "loginPasswordError"
+        );
+
+        showToast(
+            "Incorrect password.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       CHECK STUDENT REGISTRATION NUMBER
+       ===================================================== */
+
+    if(selectedLoginRole === "student") {
+
+        if(account.regdNo !== regdNo) {
+
+            showError(
+                "loginRegd",
+                "loginRegdError"
+            );
+
+            showToast(
+                "Registration number does not match this student.",
+                "error"
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CREATE SESSION
+       ===================================================== */
+
+    const session = {
+
+        role: selectedLoginRole,
+
+        name: name,
+
+        regdNo:
+            selectedLoginRole === "student"
+                ? regdNo
+                : null,
+
+        loginTime:
+            new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify(session)
+    );
+
+
+    /* =====================================================
+       SUCCESS
+       ===================================================== */
+
+    showToast(
+        `Login successful! Welcome ${name}.`,
+        "success"
+    );
+
+
+    /*
+     * For your existing project:
+     *
+     * Replace this redirect with:
+     *
+     * routeToPortal();
+     *
+     */
+
+    setTimeout(() => {
+
+        routeAfterLogin(session);
+
+    }, 700);
+
+}
+
+
+/* =========================================================
+   SHOW ERROR
+   ========================================================= */
+
+function showError(
+    inputId,
+    errorId
+) {
+
+    document
+        .getElementById(inputId)
+        .classList.add("error");
+
+
+    document
+        .getElementById(errorId)
+        .classList.add("show");
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function showToast(
+    message,
+    type = "info"
+) {
+
+    const container =
+        document.getElementById(
+            "toastContainer"
+        );
+
+
+    const toast =
+        document.createElement(
+            "div"
+        );
+
+
+    let icon = "fa-circle-info";
+
+
+    if(type === "success") {
+
+        icon = "fa-circle-check";
+
+    }
+
+    else if(type === "error") {
+
+        icon = "fa-circle-exclamation";
+
+    }
+
+
+    toast.className =
+        `toast ${type}`;
+
+
+    toast.innerHTML = `
+
+        <i class="fa-solid ${icon}"></i>
+
+        <span>
+            ${escapeHtml(message)}
+        </span>
+
+    `;
+
+
+    container.appendChild(toast);
+
+
+    setTimeout(() => {
+
+        toast.remove();
+
+    }, 3500);
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   AFTER LOGIN
+   ========================================================= */
+
+function routeAfterLogin(session) {
+
+    /*
+     * IMPORTANT:
+     *
+     * If you are putting this login page
+     * into your existing Hostel Exit Manager,
+     * use your existing routeToPortal() function
+     * here instead.
+     */
+
+
+    if(
+        typeof routeToPortal ===
+        "function"
+    ) {
+
+        routeToPortal();
+
+        return;
+
+    }
+
+
+    /*
+     * Standalone demo behavior
+     */
+
+    if(session.role === "student") {
+
+        showToast(
+            "Student portal opened.",
+            "success"
+        );
+
+    }
+
+    else if(session.role === "warden") {
+
+        showToast(
+            "Warden portal opened.",
+            "success"
+        );
+
+    }
+
+    else if(session.role === "admin") {
+
+        showToast(
+            "Admin portal opened.",
+            "success"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   AUTO SELECT STUDENT
+   ========================================================= */
+
+selectLoginRole("student");
+
+
+/* =========================================================
+   PREVENT NON-NUMERIC PASSWORD INPUT
+   ========================================================= */
+
+document
+    .getElementById("loginPassword")
+    .addEventListener(
+        "input",
+        function() {
+
+            this.value =
+                this.value
+                .replace(/\D/g, "")
+                .slice(0, 4);
+
+        }
+    );
+
+
+/* =========================================================
+   REGISTRATION NUMBER INPUT
+   ========================================================= */
+
+document
+    .getElementById("loginRegd")
+    .addEventListener(
+        "input",
+        function() {
+
+            /*
+             * Allow only letters and numbers
+             */
+
+            this.value =
+                this.value
+                .replace(/[^A-Za-z0-9]/g, "")
+                .slice(0, 10);
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
